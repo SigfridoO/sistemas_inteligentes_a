@@ -2,7 +2,7 @@
 int DI_00 = 32;
 int DI_01 = 33;
 
-int DO_00 = 23; //25;
+int DO_00 = 23;
 
 // Señales virtuales
 // Entradas
