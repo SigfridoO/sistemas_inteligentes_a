@@ -75,7 +75,7 @@ Comunicación de diagnóstico: Puerto serial
 
 ---
 
-# Estructura sugerida del repositorio
+# Estructura del repositorio
 
 ```text
 practicas/
