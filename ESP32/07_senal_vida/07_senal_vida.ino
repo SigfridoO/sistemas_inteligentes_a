@@ -130,22 +130,22 @@ void loop() {
 /////////////////////////////////////////// Temporizadores
 
 void actualizarTON (int i) {
-     if (TON [i].entrada)
-   {
-        if (!TON_Aux[i].bandera) {
-           TON_Aux[i].bandera = true;
-           TON_Aux[i].tiempo_Aux1 = millis ();  
-        }
-        TON_Aux[i].tiempo_Aux2 = millis ();
-        TON [i].tiempoActual = TON_Aux[i].tiempo_Aux2 - TON_Aux[i].tiempo_Aux1;
-
-        if (TON [i].tiempoActual > TON [i].tiempo) {
-            TON [i].salida = true;
-        }
-    } else {
-        TON [i].salida = false;
-        TON_Aux[i].bandera = false;
+    if (TON [i].entrada)
+{
+    if (!TON_Aux[i].bandera) {
+        TON_Aux[i].bandera = true;
+        TON_Aux[i].tiempo_Aux1 = millis ();  
     }
+    TON_Aux[i].tiempo_Aux2 = millis ();
+    TON [i].tiempoActual = TON_Aux[i].tiempo_Aux2 - TON_Aux[i].tiempo_Aux1;
+
+    if (TON [i].tiempoActual > TON [i].tiempo) {
+        TON [i].salida = true;
+    }
+} else {
+    TON [i].salida = false;
+    TON_Aux[i].bandera = false;
+}
 }
 
 
