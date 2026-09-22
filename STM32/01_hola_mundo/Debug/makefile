@@ -60,7 +60,7 @@ main-build: 01_hola_mundo.elf secondary-outputs
 
 # Tool invocations
 01_hola_mundo.elf 01_hola_mundo.map: $(OBJS) $(USER_OBJS) /media/sigy/DOCUMENTOS/TRABAJO/ITIZ/PROGRAMAS/sistemas_inteligentes_2026_2/sistemas_inteligentes_a/STM32/01_hola_mundo/STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "01_hola_mundo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/media/sigy/DOCUMENTOS/TRABAJO/ITIZ/PROGRAMAS/sistemas_inteligentes_2026_2/sistemas_inteligentes_a/STM32/01_hola_mundo/STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="01_hola_mundo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "01_hola_mundo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/media/sigy/DOCUMENTOS/TRABAJO/ITIZ/PROGRAMAS/sistemas_inteligentes_2026_2/sistemas_inteligentes_a/STM32/01_hola_mundo/STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="01_hola_mundo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
