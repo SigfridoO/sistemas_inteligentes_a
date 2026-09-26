@@ -1,0 +1,17 @@
+#include <stdint.h>
+uint32_t global_value = 0x12345678U;
+uint32_t global_array[4] = {
+0x11111111U,
+0x22222222U,
+0x33333333U,
+0x44444444U
+};
+
+int main(void)
+{
+uint32_t local_value = 0xABCDEF01U;
+while (1)
+{
+local_value++;
+}
+}

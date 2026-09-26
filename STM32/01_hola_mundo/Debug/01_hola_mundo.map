@@ -1019,18 +1019,18 @@ LOAD /opt/st/stm32cubeide_2.2.0/plugins/com.st.stm32cube.ide.mcu.externaltools.g
  .debug_macro   0x000029bf      0x116 ./Src/sysmem.o
  .debug_macro   0x00002ad5      0x23c ./Src/sysmem.o
 
-.debug_line     0x00000000     0x11f2
+.debug_line     0x00000000     0x11f1
  .debug_line    0x00000000      0x499 ./Src/main.o
- .debug_line    0x00000499      0x821 ./Src/syscalls.o
- .debug_line    0x00000cba      0x4bd ./Src/sysmem.o
- .debug_line    0x00001177       0x7b ./Startup/startup_stm32f411retx.o
+ .debug_line    0x00000499      0x820 ./Src/syscalls.o
+ .debug_line    0x00000cb9      0x4bd ./Src/sysmem.o
+ .debug_line    0x00001176       0x7b ./Startup/startup_stm32f411retx.o
 
-.debug_str      0x00000000     0x9844
- .debug_str     0x00000000     0x9844 ./Src/main.o
+.debug_str      0x00000000     0x9848
+ .debug_str     0x00000000     0x9848 ./Src/main.o
                                0x782f (size before relaxing)
- .debug_str     0x00009844     0x99f5 ./Src/syscalls.o
- .debug_str     0x00009844     0x76f5 ./Src/sysmem.o
- .debug_str     0x00009844       0xbc ./Startup/startup_stm32f411retx.o
+ .debug_str     0x00009848     0x99f9 ./Src/syscalls.o
+ .debug_str     0x00009848     0x76f5 ./Src/sysmem.o
+ .debug_str     0x00009848       0xbc ./Startup/startup_stm32f411retx.o
 
 .comment        0x00000000       0x43
  .comment       0x00000000       0x43 ./Src/main.o

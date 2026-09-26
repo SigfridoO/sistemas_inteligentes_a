@@ -1,8 +1,11 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=linux
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:01_hola_mundo,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:02_debugger
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:.fuse_hidden0002624c00000002,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:.fuse_hidden0002627000000004,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:02_debugger,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:.fuse_hidden0002636600000003,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:03_Memoria_01,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:01_hola_mundo
 eclipse.preferences.version=1
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:.fuse_hidden0002627000000004/activeLaunchMode=debug
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:.fuse_hidden0002636600000003/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:01_hola_mundo/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:01_hola_mundo/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:02_debugger/activeLaunchMode=debug
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:03_Memoria_01/activeLaunchMode=debug

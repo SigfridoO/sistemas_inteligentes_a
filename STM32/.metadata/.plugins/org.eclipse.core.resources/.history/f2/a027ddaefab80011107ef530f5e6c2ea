@@ -1,0 +1,26 @@
+#include <stdint.h>
+
+volatile uint32_t global_value = 0x12345678U;
+
+volatile uint32_t global_array[4] = {
+    0x11111111U,
+    0x22222222U,
+    0x33333333U,
+    0x44444444U
+};
+
+int main(void)
+{
+
+    global_value = global_value;
+
+    global_array[0] = global_array[0];
+    global_array[1] = global_array[1];
+    global_array[2] = global_array[2];
+    global_array[3] = global_array[3];
+
+    while (1)
+    {
+        local_value++;
+    }
+}

@@ -37,15 +37,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00002d11  00000000  00000000  00003e8e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   000011f2  00000000  00000000  00006b9f  2**0
+ 17 .debug_line   000011f1  00000000  00000000  00006b9f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00009844  00000000  00000000  00007d91  2**0
+ 18 .debug_str    00009848  00000000  00000000  00007d90  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000115d5  2**0
+ 19 .comment      00000043  00000000  00000000  000115d8  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000b1c  00000000  00000000  00011618  2**2
+ 20 .debug_frame  00000b1c  00000000  00000000  0001161c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 000000a0  00000000  00000000  00012134  2**0
+ 21 .debug_line_str 000000a0  00000000  00000000  00012138  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -158,10 +158,10 @@ int main(void)
  8000290:	080012d8 	.word	0x080012d8
 
 08000294 <ITM_SendChar>:
- *                 -> SWO
- *                     -> ST-LINK
- *                         -> SWV ITM Data Console
- */
+/* ITM register addresses */
+#define ITM_STIMULUS_PORT0   	*((volatile uint32_t*) 0xE0000000 )
+#define ITM_TRACE_EN          	*((volatile uint32_t*) 0xE0000E00 )
+
 void ITM_SendChar(uint8_t ch)
 {
  8000294:	b480      	push	{r7}
@@ -170,30 +170,33 @@ void ITM_SendChar(uint8_t ch)
  800029a:	4603      	mov	r3, r0
  800029c:	71fb      	strb	r3, [r7, #7]
 
-    DEMCR |= (1U << 24);
+	//Enable TRCENA
+	DEMCR |= ( 1 << 24);
  800029e:	4b0e      	ldr	r3, [pc, #56]	@ (80002d8 <ITM_SendChar+0x44>)
  80002a0:	681b      	ldr	r3, [r3, #0]
  80002a2:	4a0d      	ldr	r2, [pc, #52]	@ (80002d8 <ITM_SendChar+0x44>)
  80002a4:	f043 7380 	orr.w	r3, r3, #16777216	@ 0x1000000
  80002a8:	6013      	str	r3, [r2, #0]
-    ITM_TRACE_EN |= (1U << 0);
+
+	//enable stimulus port 0
+	ITM_TRACE_EN |= ( 1 << 0);
  80002aa:	4b0c      	ldr	r3, [pc, #48]	@ (80002dc <ITM_SendChar+0x48>)
  80002ac:	681b      	ldr	r3, [r3, #0]
  80002ae:	4a0b      	ldr	r2, [pc, #44]	@ (80002dc <ITM_SendChar+0x48>)
  80002b0:	f043 0301 	orr.w	r3, r3, #1
  80002b4:	6013      	str	r3, [r2, #0]
 
-    while (!(ITM_STIMULUS_PORT0 & 1U))
+	// read FIFO status in bit [0]:
+	while(!(ITM_STIMULUS_PORT0 & 1));
  80002b6:	bf00      	nop
  80002b8:	f04f 4360 	mov.w	r3, #3758096384	@ 0xe0000000
  80002bc:	681b      	ldr	r3, [r3, #0]
  80002be:	f003 0301 	and.w	r3, r3, #1
  80002c2:	2b00      	cmp	r3, #0
  80002c4:	d0f8      	beq.n	80002b8 <ITM_SendChar+0x24>
-    {
-    }
 
-    ITM_STIMULUS_PORT0 = ch;
+	//Write to ITM stimulus port0
+	ITM_STIMULUS_PORT0 = ch;
  80002c6:	f04f 4260 	mov.w	r2, #3758096384	@ 0xe0000000
  80002ca:	79fb      	ldrb	r3, [r7, #7]
  80002cc:	6013      	str	r3, [r2, #0]

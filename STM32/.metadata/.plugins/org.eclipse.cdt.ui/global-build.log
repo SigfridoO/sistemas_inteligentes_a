@@ -1,91 +1,31 @@
-09:25:22 **** Incremental Build of configuration Debug for project 02_debugger ****
+10:58:14 **** Build of configuration Debug for project 01_hola_mundo ****
 make -j32 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Startup/startup_stm32f411retx.d" -MT"Startup/startup_stm32f411retx.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Startup/startup_stm32f411retx.o" "../Startup/startup_stm32f411retx.s"
 arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
-arm-none-eabi-gcc -o "02_debugger.elf" @"objects.list"   -mcpu=cortex-m4 -T"/media/sigy/DOCUMENTOS/TRABAJO/ITIZ/PROGRAMAS/sistemas_inteligentes_2026_2/sistemas_inteligentes_a/STM32/02_debugger/STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="02_debugger.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: 02_debugger.elf
+arm-none-eabi-gcc "../Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/syscalls.d" -MT"Src/syscalls.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/syscalls.o"
+arm-none-eabi-gcc "../Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F411RETx -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/sysmem.d" -MT"Src/sysmem.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/sysmem.o"
+arm-none-eabi-gcc -o "01_hola_mundo.elf" @"objects.list"   -mcpu=cortex-m4 -T"/media/sigy/DOCUMENTOS/TRABAJO/ITIZ/PROGRAMAS/sistemas_inteligentes_2026_2/sistemas_inteligentes_a/STM32/01_hola_mundo/STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="01_hola_mundo.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 01_hola_mundo.elf
  
-arm-none-eabi-size  02_debugger.elf 
-arm-none-eabi-objdump -h -S 02_debugger.elf  > "02_debugger.list"
+arm-none-eabi-size  01_hola_mundo.elf 
+arm-none-eabi-objdump -h -S 01_hola_mundo.elf  > "01_hola_mundo.list"
    text	   data	    bss	    dec	    hex	filename
-   6216	    164	   1900	   8280	   2058	02_debugger.elf
+   4896	     92	   1900	   6888	   1ae8	01_hola_mundo.elf
 Finished building: default.size.stdout
  
-Finished building: 02_debugger.list
+Finished building: 01_hola_mundo.list
  
-09:28:22 **** Incremental Build of configuration Debug for project 02_debugger ****
+10:58:32 **** Incremental Build of configuration Debug for project 01_hola_mundo ****
 make -j32 all 
-arm-none-eabi-size  02_debugger.elf 
+arm-none-eabi-size  01_hola_mundo.elf 
    text	   data	    bss	    dec	    hex	filename
-   6216	    164	   1900	   8280	   2058	02_debugger.elf
+   4896	     92	   1900	   6888	   1ae8	01_hola_mundo.elf
 Finished building: default.size.stdout
  
-09:29:02 **** Incremental Build of configuration Debug for project 02_debugger ****
+10:58:42 **** Incremental Build of configuration Debug for project 01_hola_mundo ****
 make -j32 all 
-arm-none-eabi-size  02_debugger.elf 
+arm-none-eabi-size  01_hola_mundo.elf 
    text	   data	    bss	    dec	    hex	filename
-   6216	    164	   1900	   8280	   2058	02_debugger.elf
-Finished building: default.size.stdout
- 
-09:31:38 **** Incremental Build of configuration Debug for project 02_debugger ****
-make -j32 all 
-arm-none-eabi-size  02_debugger.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6216	    164	   1900	   8280	   2058	02_debugger.elf
-Finished building: default.size.stdout
- 
-09:32:36 **** Incremental Build of configuration Debug for project 02_debugger ****
-make -j32 all 
-arm-none-eabi-size  02_debugger.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6216	    164	   1900	   8280	   2058	02_debugger.elf
-Finished building: default.size.stdout
- 
-09:33:11 **** Incremental Build of configuration Debug for project 02_debugger ****
-make -j32 all 
-arm-none-eabi-size  02_debugger.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6216	    164	   1900	   8280	   2058	02_debugger.elf
-Finished building: default.size.stdout
- 
-09:33:50 **** Incremental Build of configuration Debug for project 02_debugger ****
-make -j32 all 
-arm-none-eabi-size  02_debugger.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6216	    164	   1900	   8280	   2058	02_debugger.elf
-Finished building: default.size.stdout
- 
-09:39:32 **** Incremental Build of configuration Debug for project 02_debugger ****
-make -j32 all 
-arm-none-eabi-size  02_debugger.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6216	    164	   1900	   8280	   2058	02_debugger.elf
-Finished building: default.size.stdout
- 
-10:17:38 **** Incremental Build of configuration Debug for project 02_debugger ****
-make -j32 all 
-arm-none-eabi-size  02_debugger.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6216	    164	   1900	   8280	   2058	02_debugger.elf
-Finished building: default.size.stdout
- 
-10:32:08 **** Incremental Build of configuration Debug for project 02_debugger ****
-make -j32 all 
-arm-none-eabi-size  02_debugger.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6216	    164	   1900	   8280	   2058	02_debugger.elf
-Finished building: default.size.stdout
- 
-10:32:24 **** Incremental Build of configuration Debug for project 02_debugger ****
-make -j32 all 
-arm-none-eabi-size  02_debugger.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6216	    164	   1900	   8280	   2058	02_debugger.elf
-Finished building: default.size.stdout
- 
-10:36:05 **** Incremental Build of configuration Debug for project 02_debugger ****
-make -j32 all 
-arm-none-eabi-size  02_debugger.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6216	    164	   1900	   8280	   2058	02_debugger.elf
+   4896	     92	   1900	   6888	   1ae8	01_hola_mundo.elf
 Finished building: default.size.stdout
  

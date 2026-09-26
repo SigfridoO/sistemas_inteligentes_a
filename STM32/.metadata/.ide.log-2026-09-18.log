@@ -1,0 +1,39 @@
+2026-09-18 07:49:53,082 [INFO] Activator:177 - 
+
+
+2026-09-18 07:49:53,083 [INFO] Activator:178 - !SESSION log4j initialized
+2026-09-18 07:49:54,671 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] 
+2026-09-18 08:00:43,210 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-09-18 08:01:44,668 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-09-18 08:01:47,111 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-09-18 08:01:51,429 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-09-18 08:32:38,780 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] StartTraceHandler.execute(), success : Collect=true
+2026-09-18 08:33:36,134 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2026-09-18 08:33:39,467 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-09-18 08:41:51,720 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-09-18 08:46:39,348 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-09-18 08:46:41,351 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2026-09-18 08:46:47,764 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2026-09-18 08:46:49,768 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2026-09-18 08:46:51,771 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2026-09-18 09:28:26,915 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-09-18 09:28:38,028 [ERROR] AdobePublisher:162 - Exception while opening the connection: java.net.SocketTimeoutException: Read timed out
+2026-09-18 09:28:38,028 [ERROR] AdobePublisher:162 - Exception while opening the connection: java.net.SocketTimeoutException: Read timed out
+2026-09-18 09:28:38,028 [ERROR] AdobePublisher:162 - Exception while opening the connection: java.net.SocketTimeoutException: Read timed out
+2026-09-18 09:28:38,029 [ERROR] AdobePublisher:162 - Exception while opening the connection: java.net.SocketTimeoutException: Read timed out
+2026-09-18 09:28:38,029 [ERROR] AdobePublisher:162 - Exception while opening the connection: java.net.SocketTimeoutException: Read timed out
+2026-09-18 09:33:18,517 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-09-18 09:33:58,181 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-09-18 09:39:36,117 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-09-18 09:39:38,120 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2026-09-18 10:17:46,622 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2026-09-18 10:17:48,625 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2026-09-18 10:32:38,859 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2026-09-18 10:32:38,860 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2026-09-18 10:32:38,861 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2026-09-18 10:32:38,873 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2026-09-18 10:32:38,873 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2026-09-18 10:32:38,874 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2026-09-18 10:36:30,248 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2026-09-18 10:36:30,249 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2026-09-18 10:36:30,250 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
