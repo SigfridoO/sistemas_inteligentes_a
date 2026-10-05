@@ -7,8 +7,8 @@ int DI_04 = 27;
 int DI_05 = 14;
 
 int DO_00 = 2;
-int DO_01 = 22;
-int DO_02 = 21;
+int DO_01 = 23;
+int DO_02 = 22;
 
 // Señales virtuales
 // Entradas
@@ -67,6 +67,9 @@ void actualizarContador (byte);
 // Secuencia
 int contador;
 
+// Comunicación por el puerto serie
+byte caracter;
+
 void setup() {
   // Configuracion de pines
   pinMode(DI_00, INPUT);
@@ -102,6 +105,15 @@ void setup() {
 
 void loop() {
   //////////////////////////////////////////////////////////
+  // leer datos del puerto serie
+  if (Serial.available() > 0) {
+      caracter = Serial.read();
+      if ((char) caracter == 'k'){
+        M_01 = 1;
+      }
+  }
+  
+  
   //Señal de vida
 
   TON[0].entrada = !TON[1].salida && !C[0].salida;
@@ -125,11 +137,16 @@ void loop() {
 
   if (TON[3].salida) {
       contador++;
-      Serial.write(contador);
   }
 
-  // Para debugear
+  // Control del programa
+  M_00 = (X_00 || M_00 || M_01) && !X_01;
+
+  Y_01 = M_00;
+
   
+  // Para debugear
+  //Serial.printf ("\nX_00 %d, X_01 %d M_00 %d, M_01 %d", X_00, X_01, M_00, M_01);
   // Mapeando entradas y salidas
   X_00 = digitalRead(DI_00);
   X_01 = digitalRead(DI_01);
