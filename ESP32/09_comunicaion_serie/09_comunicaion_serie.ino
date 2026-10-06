@@ -23,12 +23,15 @@ byte Y_00 = 0;
 byte Y_01 = 0;
 byte Y_02 = 0;
 
+/*
 byte M_00 = 0;
 byte M_01 = 0;
 byte M_02 = 0;
 byte M_03 = 0;
 byte M_04 = 0;
-
+*/
+#define numero_banderas 80
+byte M[numero_banderas];
 //////////////////////////////////////////////// Temporizadores
 
 #define  numeroDeTON 16
@@ -67,8 +70,43 @@ void actualizarContador (byte);
 // Secuencia
 int contador;
 
-// Comunicación por el puerto serie
-byte caracter;
+//////////////////////////////////////////////// Comunicación
+/*
+ *  CI|TI|NU|DATOS.................|LG|V|CF
+ *  00 01 02 03 04 05 06 07 .......
+ *  
+ *  CI -- Caracter de inicio
+ *  TI -- Tipo de instrucción
+ *  NU -- Número de instrucción
+ *  LG -- Longitud
+ *  V  -- Verificación
+ *  CF -- Caracter de Final
+ */
+
+#define bufferIndiceMaximo 120
+byte bufferLectura[bufferIndiceMaximo];
+int bufferIndice=  0;
+
+byte bufferInstruccion[bufferIndiceMaximo];
+int bufferIndiceInstruccion = 0;
+
+void leerInstruccionDeBuffer(byte *, int *, byte *, int *);
+void obtenerInstruccion();
+
+char caracterDeInicio = '&';
+char caracterDeFin = '*';
+
+void colocarDatosEnBuffer();
+void imprimirTrama(byte *, int, int);
+byte obtenerByteDeArregloByte(byte *);
+
+// FIXME: Actualizar codigos
+#define ADMINISTRACION 48 // '0'
+#define SOLICITAR_VERSION 49  // '1'
+
+#define CONTROL 49 // '1'
+#define MODIFICAR_BANDERAS 48 // '0'
+
 
 void setup() {
   // Configuracion de pines
@@ -106,13 +144,8 @@ void setup() {
 void loop() {
   //////////////////////////////////////////////////////////
   // leer datos del puerto serie
-  if (Serial.available() > 0) {
-      caracter = Serial.read();
-      if ((char) caracter == 'k'){
-        M_01 = 1;
-      }
-  }
-  
+  colocarDatosEnBuffer();  
+  leerInstruccionDeBuffer(bufferLectura, &bufferIndice, bufferInstruccion, &bufferIndiceInstruccion);
   
   //Señal de vida
 
@@ -140,10 +173,13 @@ void loop() {
   }
 
   // Control del programa
-  M_00 = (X_00 || M_00 || M_01) && !X_01;
+  M[0] = (X_00 || M[0] || M[1]) && !X_01 && !M[2] ;
 
-  Y_01 = M_00;
+  Y_01 = M[0];
 
+  M[1] = 0;
+  M[2] = 0;
+  
   
   // Para debugear
   //Serial.printf ("\nX_00 %d, X_01 %d M_00 %d, M_01 %d", X_00, X_01, M_00, M_01);
@@ -214,4 +250,114 @@ void actualizarContador (byte numeroContador) {
     
     C[numeroContador].aux1 = C[numeroContador].entrada;
     C[numeroContador].reset = 0;
+}
+
+
+///////////////////////////////////////////////// Comunicación
+void colocarDatosEnBuffer(){
+  byte caracter = 0;
+  int aux = 0;
+
+  while (Serial.available() > 0) {
+    caracter = Serial.read();
+    bufferLectura[bufferIndice++] = caracter;
+
+    if (bufferIndice + 1 > bufferIndiceMaximo){
+      aux = bufferIndiceMaximo >> 1;
+      for (int i = aux; i < bufferIndiceMaximo + 1; i++) {
+        bufferIndice = i - aux;
+        bufferLectura[bufferIndice] = bufferLectura[i];
+      }
+    }
+  }
+//  imprimirTrama(bufferLectura, 0, bufferIndice);
+}
+
+void imprimirTrama(byte *prtTrama, int inicio, int tamanio){
+  if (tamanio > 0) {
+    Serial.print("\n>>");
+    for (int k = inicio; k < inicio + tamanio; k++) {
+      Serial.write(*(prtTrama + k));
+      //Serial.write(prtTrama [k]);
+    }
+  }
+}
+
+void leerInstruccionDeBuffer(byte *ptrBufferLectura, int *ptrBufferIndice, 
+  byte *ptrBufferInstruccion, int *ptrTamanioBufferInstruccion){
+  int i = 0;
+  int k = 0;
+  int encontrado = -1;
+
+  if (ptrBufferLectura[*ptrBufferIndice - 1] == caracterDeFin) {
+      for (k = *ptrBufferIndice; k >= 0; --k) {
+         if(ptrBufferLectura[k] == (byte) caracterDeInicio) {
+            encontrado = k;
+            if (encontrado >= 0) {
+              *ptrTamanioBufferInstruccion = 0;
+  
+                for (int j = k; j < *ptrBufferIndice; j++) {
+                  ptrBufferInstruccion[*ptrTamanioBufferInstruccion] = ptrBufferLectura[j];
+                  (*ptrTamanioBufferInstruccion)++;
+                }
+                // Aqui tendremos la instruccion separada
+                // TODO: procesar la instruccion
+                obtenerInstruccion();
+                
+//                imprimirTrama(ptrBufferInstruccion, 0, *ptrTamanioBufferInstruccion );
+                *ptrBufferIndice = k;
+            } // if
+         } // if 
+      } // for
+  } // if 
+}
+
+void obtenerInstruccion(){
+    int *tamanio;
+    byte *cadena;
+
+    int tipoDeInstruccion = 0;
+    int numeroDeInstruccion = 0;
+
+    tamanio = &bufferIndiceInstruccion;
+    cadena = bufferInstruccion;
+
+    tipoDeInstruccion = obtenerByteDeArregloByte(cadena + 1);
+    numeroDeInstruccion = obtenerByteDeArregloByte(cadena + 2);
+
+    //Serial.printf("\ntipo: %d", tipoDeInstruccion);
+    //Serial.printf("\nnumero: %d", numeroDeInstruccion);
+
+    byte indice = 0;
+    byte valor = 0;
+    switch(tipoDeInstruccion) {
+        case ADMINISTRACION:
+          switch (numeroDeInstruccion) {
+              case SOLICITAR_VERSION:
+                  Serial.print("\nVersion 0.0.1 en EPS32 - \nSigfrido Soria");
+                  break;
+          }
+
+        
+          break;
+
+        case CONTROL:
+            switch(numeroDeInstruccion) {
+                case MODIFICAR_BANDERAS:
+
+                    indice = obtenerByteDeArregloByte(cadena + 3) - 48;
+                    valor = obtenerByteDeArregloByte(cadena + 4) - 48;
+
+                    M[indice] = valor;
+                    break;
+            } 
+        
+            break;
+    }
+}
+
+byte obtenerByteDeArregloByte(byte *arreglo){
+    byte *punteroByte;
+    punteroByte = (byte *) arreglo;
+    return *punteroByte;
 }
