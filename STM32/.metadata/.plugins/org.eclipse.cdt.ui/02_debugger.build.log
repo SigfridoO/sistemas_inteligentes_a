@@ -1,4 +1,4 @@
-09:18:13 **** Incremental Build of configuration Debug for project 02_debugger ****
+07:56:24 **** Incremental Build of configuration Debug for project 02_debugger ****
 make -j32 all 
 arm-none-eabi-size  02_debugger.elf 
    text	   data	    bss	    dec	    hex	filename
@@ -6,5 +6,5 @@ arm-none-eabi-size  02_debugger.elf
 Finished building: default.size.stdout
  
 
-09:18:13 Build Finished. 0 errors, 0 warnings. (took 83ms)
+07:56:24 Build Finished. 0 errors, 0 warnings. (took 80ms)
 

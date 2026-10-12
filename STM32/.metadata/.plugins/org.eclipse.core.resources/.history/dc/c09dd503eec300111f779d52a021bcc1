@@ -1,0 +1,26 @@
+#include <stdint.h>
+#include "plc_io.h"
+
+static void delaySoftware(volatile uint32_t tiempo)
+{
+    while (tiempo > 0U)
+    {
+        tiempo--;
+    }
+}
+
+int main(void)
+{
+    sistemaInicializar();
+
+    while (1)
+    {
+        Y_00 = 1U;
+        actualizarSalidas();
+        delaySoftware(1000000U);
+
+        Y_00 = 0U;
+        actualizarSalidas();
+        delaySoftware(1000000U);
+    }
+}

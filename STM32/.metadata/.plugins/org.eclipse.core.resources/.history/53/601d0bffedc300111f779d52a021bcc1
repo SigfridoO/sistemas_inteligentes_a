@@ -1,0 +1,57 @@
+#include "plc_io.h"
+
+#define RCC_BASE        0x40023800UL
+#define GPIOA_BASE      0x40020000UL
+
+#define RCC_AHB1ENR \
+    (*(volatile uint32_t *)(RCC_BASE + 0x30UL))
+#define GPIOA_MODER \
+    (*(volatile uint32_t *)(GPIOA_BASE + 0x00UL))
+#define GPIOA_OTYPER \
+    (*(volatile uint32_t *)(GPIOA_BASE + 0x04UL))
+#define GPIOA_OSPEEDR \
+    (*(volatile uint32_t *)(GPIOA_BASE + 0x08UL))
+#define GPIOA_PUPDR \
+    (*(volatile uint32_t *)(GPIOA_BASE + 0x0CUL))
+#define GPIOA_BSRR \
+    (*(volatile uint32_t *)(GPIOA_BASE + 0x18UL))
+
+uint8_t Y_00 = 0U;
+uint8_t Y_01 = 0U;
+uint8_t Y_02 = 0U;
+
+uint8_t M_00 = 0U;
+uint8_t M_01 = 0U;
+uint8_t M_02 = 0U;
+uint8_t M_03 = 0U;
+uint8_t M_04 = 0U;
+
+void sistemaInicializar(void)
+{
+    RCC_AHB1ENR |= (1U << 0);
+    (void)RCC_AHB1ENR;
+
+    GPIOA_MODER &= ~(3U << 10);
+    GPIOA_MODER |=  (1U << 10);
+    GPIOA_OTYPER &= ~(1U << 5);
+    GPIOA_OSPEEDR &= ~(3U << 10);
+    GPIOA_PUPDR &= ~(3U << 10);
+
+    Y_00 = 0U;
+    Y_01 = 0U;
+    Y_02 = 0U;
+
+    GPIOA_BSRR = (1U << 21);
+}
+
+void actualizarSalidas(void)
+{
+    if (Y_00 != 0U)
+    {
+        GPIOA_BSRR = (1U << 5);
+    }
+    else
+    {
+        GPIOA_BSRR = (1U << 21);
+    }
+}

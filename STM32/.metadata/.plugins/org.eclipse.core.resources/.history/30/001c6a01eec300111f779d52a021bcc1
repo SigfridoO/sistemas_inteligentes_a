@@ -1,0 +1,19 @@
+#ifndef PLC_IO_H_
+#define PLC_IO_H_
+
+#include <stdint.h>
+
+extern uint8_t Y_00;
+extern uint8_t Y_01;
+extern uint8_t Y_02;
+
+extern uint8_t M_00;
+extern uint8_t M_01;
+extern uint8_t M_02;
+extern uint8_t M_03;
+extern uint8_t M_04;
+
+void sistemaInicializar(void);
+void actualizarSalidas(void);
+
+#endif

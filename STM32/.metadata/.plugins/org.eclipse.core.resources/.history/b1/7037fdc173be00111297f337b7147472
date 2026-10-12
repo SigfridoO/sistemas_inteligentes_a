@@ -1,0 +1,52 @@
+#include <stdint.h>
+/* =========================================================
+* DIRECCIONES BASE
+* =========================================================
+*/
+#define RCC_BASE 0x40023800UL
+#define GPIOA_BASE 0x40020000UL
+/* =========================================================
+* REGISTROS RCC
+* =========================================================
+*/
+#define RCC_AHB1ENR \
+(*(volatile uint32_t *)(RCC_BASE + 0x30UL))
+/* =========================================================
+* REGISTROS GPIOA
+* =========================================================
+*/
+#define GPIOA_MODER \
+(*(volatile uint32_t *)(GPIOA_BASE + 0x00UL))
+#define GPIOA_OTYPER \
+(*(volatile uint32_t *)(GPIOA_BASE + 0x04UL))
+#define GPIOA_OSPEEDR \
+(*(volatile uint32_t *)(GPIOA_BASE + 0x08UL))
+#define GPIOA_PUPDR \
+(*(volatile uint32_t *)(GPIOA_BASE + 0x0CUL))
+#define GPIOA_ODR \
+(*(volatile uint32_t *)(GPIOA_BASE + 0x14UL))
+
+
+
+#define GPIOA_BSRR \
+(*(volatile uint32_t *)(GPIOA_BASE + 0x18UL))
+int main(void)
+{
+/* Etapa 1: habilitar reloj de GPIOA */
+RCC_AHB1ENR |= (1U << 0);
+/* Etapa 2: configurar PA5 como salida */
+GPIOA_MODER &= ~(3U << 10);
+GPIOA_MODER |= (1U << 10);
+/* Etapa 3: configurar salida push-pull */
+GPIOA_OTYPER &= ~(1U << 5);
+/* Etapa 4: seleccionar velocidad baja */
+GPIOA_OSPEEDR &= ~(3U << 10);
+/* Etapa 5: sin pull-up ni pull-down */
+GPIOA_PUPDR &= ~(3U << 10);
+/* Etapa 6: colocar PA5 en nivel alto */
+GPIOA_BSRR = (1U << 5);
+}
+/* Etapa 7: mantener el programa ejecutandose */
+while (1)
+{
+}

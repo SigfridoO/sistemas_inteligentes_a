@@ -1,26 +1,18 @@
-2026-09-25 03:20:24,788 [INFO] Activator:177 - 
+2026-10-09 07:36:26,570 [INFO] Activator:177 - 
 
 
-2026-09-25 03:20:24,801 [INFO] Activator:178 - !SESSION log4j initialized
-2026-09-25 03:20:27,483 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] 
-2026-09-25 05:44:01,500 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] SWT SessionManagerDBus: Failed to UnregisterClient: GDBus.Error:org.freedesktop.DBus.Error.NoReply: Message recipient disconnected from message bus without replying
-2026-09-25 07:26:16,386 [INFO] Activator:177 - 
-
-
-2026-09-25 07:26:16,387 [INFO] Activator:178 - !SESSION log4j initialized
-2026-09-25 07:26:19,056 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] 
-2026-09-25 07:28:01,604 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] StartTraceHandler.execute(), success : Collect=false
-2026-09-25 07:28:11,482 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] StartTraceHandler.execute(), success : Collect=true
-2026-09-25 07:40:55,876 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] StartTraceHandler.execute(), success : Collect=false
-2026-09-25 07:40:57,454 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] StartTraceHandler.execute(), success : Collect=true
-2026-09-25 10:58:14,712 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
-2026-09-25 10:58:14,722 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
-2026-09-25 10:58:14,723 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
-2026-09-25 10:58:32,613 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
-2026-09-25 10:58:32,613 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
-2026-09-25 10:58:32,643 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
-2026-09-25 10:58:42,587 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
-2026-09-25 10:58:42,588 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
-2026-09-25 10:58:42,588 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
-2026-09-25 11:03:38,765 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] StartTraceHandler.execute(), success : Collect=false
-2026-09-25 11:03:44,744 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] StartTraceHandler.execute(), success : Collect=true
+2026-10-09 07:36:26,573 [INFO] Activator:178 - !SESSION log4j initialized
+2026-10-09 07:36:30,061 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] 
+2026-10-09 07:36:42,565 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-10-09 07:37:21,772 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-10-09 07:37:28,907 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-10-09 07:39:01,516 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-10-09 07:39:05,902 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-10-09 07:39:08,727 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-10-09 07:39:10,847 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-10-09 07:39:13,332 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-10-09 07:39:17,928 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-10-09 07:39:21,129 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-10-09 07:39:24,819 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-10-09 07:39:28,595 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-10-09 13:42:52,242 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
