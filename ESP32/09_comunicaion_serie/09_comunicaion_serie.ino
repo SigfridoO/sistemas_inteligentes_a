@@ -95,10 +95,35 @@ void obtenerInstruccion();
 
 char caracterDeInicio = '&';
 char caracterDeFin = '*';
+int  escrituraLongitud = 0;
+byte escrituraMascara = 0;
+
 
 void colocarDatosEnBuffer();
+
+#define bufferIndiceEscrituraMaximo 120
+byte bufferEscritura[bufferIndiceEscrituraMaximo];
+int bufferEscrituraIndice = 0;
+
+void bufferEscrituraLimpiar(void);
+void establecerInicioEscritura(int, int);
+void establecerFinEscritura(void);
+
 void imprimirTrama(byte *, int, int);
+
 byte obtenerByteDeArregloByte(byte *);
+uint16_t obtenerInt16DeArregloByte (byte *);
+uint32_t obtenerInt32DeArregloByte (byte *);
+float obtenerFloatDeArregloByte (byte *);
+char obtenerCaracterDeArregloByte (byte *);
+
+void escribirUint8EnBufferEscritura(uint8_t);
+void escribirUint16EenBufferEscritura(uint16_t);
+void escribirUint32EnBufferEscritura(uint32_t);
+void escribirFloatEnBufferEscritura(float);
+void escribirCaracterEnBufferEscritura(char);
+
+
 
 // FIXME: Actualizar codigos
 #define ADMINISTRACION 48 // '0'
@@ -106,6 +131,9 @@ byte obtenerByteDeArregloByte(byte *);
 
 #define CONTROL 49 // '1'
 #define MODIFICAR_BANDERAS 48 // '0'
+
+#define LEER_SENALES 50 // '2'
+#define LEER_SENALES_RESPUESTA 51 // '3'
 
 
 void setup() {
@@ -350,6 +378,11 @@ void obtenerInstruccion(){
 
                     M[indice] = valor;
                     break;
+                case LEER_SENALES:
+                    establecerInicioEscritura(CONTROL, LEER_SENALES_RESPUESTA);
+                    establecerFinEscritura();
+                    Serial.write(bufferEscritura, bufferEscrituraIndice);
+                    break;
             } 
         
             break;
@@ -360,4 +393,38 @@ byte obtenerByteDeArregloByte(byte *arreglo){
     byte *punteroByte;
     punteroByte = (byte *) arreglo;
     return *punteroByte;
+}
+
+
+void bufferEscrituraLimpiar(void){
+  for (int i = 0; i < bufferIndiceEscrituraMaximo; i++) {
+    bufferEscritura[i] = (byte) 0;
+  }
+  bufferEscrituraIndice = 0;
+  escrituraLongitud = 0;
+  escrituraMascara = 0;
+}
+
+void establecerInicioEscritura(int tipo, int numeroInstruccion) {
+  bufferEscrituraLimpiar();
+  escribirCaracterEnBufferEscritura(caracterDeInicio);
+  escribirUint16EnBufferEscritura(tipo);
+  escribirUint16EnBufferEscritura(numeroInstruccion);
+}
+
+void establecerFinEscritura(void){
+
+  escribirCaracterEnBufferEscritura(caracterDeFin);
+}
+
+
+void escribirUint16EnBufferEscritura(uint16_t numero) {
+  byte b0 = (byte) (numero & 0xFFU);
+  byte b1 = (byte) ((numero >> 8) & 0xFFU);
+  bufferEscritura[bufferEscrituraIndice++] = b0;
+  bufferEscritura[bufferEscrituraIndice++] = b1;
+}
+
+void escribirCaracterEnBufferEscritura(char caracter) {
+  bufferEscritura[bufferEscrituraIndice++] = (char) caracter;
 }
