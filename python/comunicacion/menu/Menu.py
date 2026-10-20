@@ -54,9 +54,11 @@ class Menu:
 
         # Paquete de 100 bytes: b'&13*' seguido de 96 bytes en cero.
         arreglo_bytes = bytearray(100)
-        arreglo_bytes[:4] = b"&13*"
+        arreglo_bytes[:4] = b"&01*"
 
-        self.puerto_serie.escribir(arreglo_bytes):
+        self.puerto_serie.escribir(arreglo_bytes, 4)
+        respuesta = self.puerto_serie.leer()  # Leer el primer byte de respuesta
+        print(f"Respuesta recibida: {respuesta} ")
         
 
 

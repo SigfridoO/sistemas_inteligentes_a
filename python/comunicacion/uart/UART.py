@@ -20,16 +20,16 @@ class PuertoSerie:
 
     def leer(self):
         if self.serial_port.is_open:
-            res = self.serial_port.read(1)
+            res = self.serial_port.read(100)
             if res:
-                return ord(res)
+                return res
         return None
 
-    def escribir(self, data):
+    def escribir(self, data, length):
         if self.serial_port.is_open:
-            self.serial_port.write(bytes([data]))
-            print(f"Escrito: {data}")   
-            
+            self.serial_port.write(data[:length])
+            print(f"Escrito: {data[:length]}")   
+
     def cerrar(self):
         if self.serial_port.is_open:
             self.serial_port.close()
