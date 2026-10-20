@@ -26,6 +26,8 @@ class Menu:
                     {"name": "Conectar puerto serie", "value": "puerto_serie_conectar"},
                     {"name": "Desconectar puerto serie", "value": "puerto_serie_desconectar"},
                     {"name": "Obtener versión del programa", "value": "obtener_version"},
+                    {"name": "Prender LED", "value": "prender_led"},
+                    {"name": "Apagar LED", "value": "apagar_led"},
                     {"name": "Salir", "value": "salir"},
                 ],
             ).execute()
@@ -38,6 +40,12 @@ class Menu:
                     self.conectar_puerto_serie()
                 case "puerto_serie_desconectar":
                     self.desconectar_puerto_serie()
+                case "prender_led":
+                    self.prender_led()
+                case "apagar_led":
+                    self.apagar_led()
+
+
                 case "obtener_version":
                     self.obtener_version()
 
@@ -60,6 +68,23 @@ class Menu:
         respuesta = self.puerto_serie.leer()  # Leer el primer byte de respuesta
         print(f"Respuesta recibida: {respuesta} ")
         
+    def prender_led(self):  
+        if not self.puerto_serie.serial_port.is_open:
+            print("Primero debes conectar el puerto serie.")
+            return
+        
+        arreglo_bytes = bytearray(100)
+        arreglo_bytes[:6] = b"&1011*"
+        self.puerto_serie.escribir(arreglo_bytes, 6)
+
+    def apagar_led(self):
+        if not self.puerto_serie.serial_port.is_open:
+            print("Primero debes conectar el puerto serie.")
+            return
+
+        arreglo_bytes = bytearray(100)
+        arreglo_bytes[:6] = b"&1021*"
+        self.puerto_serie.escribir(arreglo_bytes, 6)
 
 
 def main():
