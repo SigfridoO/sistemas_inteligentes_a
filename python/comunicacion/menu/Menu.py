@@ -47,11 +47,11 @@ class Menu:
         self.puerto_serie.cerrar()
 
     def obtener_version(self):
-        arreglo_bytes = bytearray()
-        arreglo_bytes.append(struct.pack('c', "&"))
-        arreglo_bytes.append(struct.pack('c', "1"))
-        arreglo_bytes.append(struct.pack('c', "3"))
-        arreglo_bytes.append(struct.pack('c', "*"))
+        arreglo_bytes = bytearray(100)
+        arreglo_bytes[0]=struct.pack('c', '&'.encode('utf-8'))
+        arreglo_bytes[1]=struct.pack('b', '1'.encode('utf-8'))
+        arreglo_bytes[2]=struct.pack('b', '3'.encode('utf-8'))
+        arreglo_bytes[3]=struct.pack('c', '*'.encode('utf-8'))
         self.puerto_serie.escribir(arreglo_bytes)
 
 def main():
