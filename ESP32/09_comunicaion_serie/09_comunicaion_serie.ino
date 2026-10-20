@@ -12,16 +12,20 @@ int DO_02 = 22;
 
 // Señales virtuales
 // Entradas
-byte X_00 = 0;
-byte X_01 = 0;
-byte X_02 = 0;
-byte X_03 = 0;
-byte X_04 = 0;
-byte X_05 = 0;
+#define NUMERO_X 8
+byte X[NUMERO_X];
+//byte X_00 = 0;
+//byte X_01 = 0;
+//byte X_02 = 0;
+//byte X_03 = 0;
+//byte X_04 = 0;
+//byte X_05 = 0;
 
-byte Y_00 = 0;
-byte Y_01 = 0;
-byte Y_02 = 0;
+#define NUMERO_Y 8
+byte Y[NUMERO_Y];
+//byte Y_00 = 0;
+//byte Y_01 = 0;
+//byte Y_02 = 0;
 
 /*
 byte M_00 = 0;
@@ -190,7 +194,7 @@ void loop() {
   TON[2].entrada = C[0].salida;
   actualizarTON(2);
 
-  Y_00 = !TON[0].salida && !C[0].salida;
+  Y[0] = !TON[0].salida && !C[0].salida;
 
   // Secuencia
   TON[3].entrada = !TON[3].salida;
@@ -201,9 +205,9 @@ void loop() {
   }
 
   // Control del programa
-  M[0] = (X_00 || M[0] || M[1]) && !X_01 && !M[2] ;
+  M[0] = (X[0] || M[0] || M[1]) && !X[1] && !M[2] ;
 
-  Y_01 = M[0];
+  Y[1] = M[0];
 
   M[1] = 0;
   M[2] = 0;
@@ -212,17 +216,17 @@ void loop() {
   // Para debugear
   //Serial.printf ("\nX_00 %d, X_01 %d M_00 %d, M_01 %d", X_00, X_01, M_00, M_01);
   // Mapeando entradas y salidas
-  X_00 = digitalRead(DI_00);
-  X_01 = digitalRead(DI_01);
-  X_02 = digitalRead(DI_02);
-  X_03 = digitalRead(DI_03);
-  X_04 = digitalRead(DI_04);
-  X_05 = digitalRead(DI_05);
+  X[0] = digitalRead(DI_00);
+  X[1] = digitalRead(DI_01);
+  X[2] = digitalRead(DI_02);
+  X[3] = digitalRead(DI_03);
+  X[4] = digitalRead(DI_04);
+  X[5] = digitalRead(DI_05);
 
   
-  digitalWrite(DO_00, Y_00);
-  digitalWrite(DO_01, Y_01);
-  digitalWrite(DO_02, Y_02);
+  digitalWrite(DO_00, Y[0]);
+  digitalWrite(DO_01, Y[1]);
+  digitalWrite(DO_02, Y[2]);
 
 }
 
@@ -380,6 +384,21 @@ void obtenerInstruccion(){
                     break;
                 case LEER_SENALES:
                     establecerInicioEscritura(CONTROL, LEER_SENALES_RESPUESTA);
+
+                    // Colocando las entradas
+                    byte aux = 0;
+                    for (int i = 0; i < 8; i++) {
+                        aux |= X[i] << i;
+                    }
+                    escribirUint8EnBufferEscritura(aux);
+
+                    // Colocando las salidas
+                    aux = 0;
+                    for (int i = 0; i < 8; i++) {
+                        aux |= Y[i] << i;
+                    }
+                    escribirUint8EnBufferEscritura(aux);
+                    
                     establecerFinEscritura();
                     Serial.write(bufferEscritura, bufferEscrituraIndice);
                     break;
@@ -427,4 +446,8 @@ void escribirUint16EnBufferEscritura(uint16_t numero) {
 
 void escribirCaracterEnBufferEscritura(char caracter) {
   bufferEscritura[bufferEscrituraIndice++] = (char) caracter;
+}
+
+void escribirUint8EnBufferEscritura(uint8_t numero) {
+  bufferEscritura[bufferEscrituraIndice++] =  numero;
 }
