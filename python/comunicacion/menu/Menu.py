@@ -17,6 +17,40 @@ from uart.UART import PuertoSerie
 class Menu:
     def __init__(self, puerto="/dev/ttyUSB0", baudrate=115200):
         self.puerto_serie = PuertoSerie(puerto, baudrate)
+        self.X = []
+        self.Y = []
+
+    def submenu_senales_digitales(self):
+        
+
+        while True:
+            self.limpiar_pantalla()
+            print(f"{term.darkorange2}=============================================================")
+            print(f"{term.white}Submenú señales digitales")
+            print(f"{term.darkorange2}============================================================={term.normal}")
+
+            opcion = inquirer.select(
+                message="Seleccione una opción:",
+                choices=[
+                    {"name": "Leer entradas y salidas", "value": "leer_entradas_salidas"},
+                    {"name": "Volver al menú principal", "value": "volver"},
+                ],
+            ).execute()
+
+            
+
+            match opcion:
+                case "volver":
+                    break
+                case "leer_entradas_salidas":
+                    self.leer_entradas_salidas()
+            self.pausa()
+
+    def pausa(self):
+        input("Presione Enter para continuar...")
+
+    def limpiar_pantalla(self):
+        print(term.clear())
 
     def mostrar_menu(self):
         while True:
@@ -33,7 +67,7 @@ class Menu:
                     {"name": "Prender LED", "value": "prender_led"},
                     {"name": "Apagar LED", "value": "apagar_led"},
 
-                    {"name": "Leer entradas y salidas", "value": "leer_entradas_salidas"},
+                    {"name": "señales digitales", "value": "submenu_senales_digitales"},
 
                     {"name": "Salir", "value": "salir"},
                 ],
@@ -51,8 +85,8 @@ class Menu:
                     self.prender_led()
                 case "apagar_led":
                     self.apagar_led()
-                case "leer_entradas_salidas":
-                    self.leer_entradas_salidas()
+                case "submenu_senales_digitales":
+                    self.submenu_senales_digitales()
 
                 case "obtener_version":
                     self.obtener_version()
@@ -104,7 +138,26 @@ class Menu:
         self.puerto_serie.escribir(arreglo_bytes, 4)
 
         respuesta = self.puerto_serie.leer()  # Leer el primer byte de respuesta
-        print(f"Respuesta recibida: {respuesta} ")
+        print(f"Respuesta recibida: {respuesta} longitud {len(respuesta)}")
+        
+
+        if respuesta and len(respuesta) > 6:
+            print(f"X = {respuesta[5]},  Y = {respuesta[6]}")
+            X = respuesta[5]
+            Y = respuesta[6]
+
+            for i in range(8):
+                self.X.append((X >> i) & 1)
+
+            for i in range(8):
+                self.Y.append((Y >> i) & 1)
+
+            print ("Estado de las señales")
+            for i in range(8):
+                print(f"| X{i:02X} = {self.X[i]} |  Y{i:02X} = {self.Y[i]}")
+            
+            
+            
 
 
 
