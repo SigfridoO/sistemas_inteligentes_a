@@ -24,6 +24,7 @@ class Menu:
         
 
         while True:
+
             self.limpiar_pantalla()
             print(f"{term.darkorange2}=============================================================")
             print(f"{term.white}Submenú señales digitales")
@@ -50,10 +51,13 @@ class Menu:
         input("Presione Enter para continuar...")
 
     def limpiar_pantalla(self):
-        print(term.clear())
+        print(term.home + term.clear)
+        print()
 
     def mostrar_menu(self):
+        
         while True:
+            self.limpiar_pantalla()
             print(f"{term.darkorange2}=============================================================")
             print(f"{term.white}Menu microcontroladores")
             print(f"{term.darkorange2}============================================================={term.normal}")
@@ -162,7 +166,6 @@ class Menu:
 
 
 def main():
-    print("Bienvenido al menú de opciones")
     menu = Menu()
     try:
         menu.mostrar_menu()
