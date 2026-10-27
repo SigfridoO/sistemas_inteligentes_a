@@ -20,6 +20,54 @@ class Menu:
         self.X = []
         self.Y = []
 
+    def submenu_funciones_administrativas(self):
+        while True:
+            self.limpiar_pantalla()
+            print(f"{term.darkorange2}=============================================================")
+            print(f"{term.white}Submenú funciones administrativas")
+            print(f"{term.darkorange2}============================================================={term.normal}")
+
+            opcion = inquirer.select(
+                message="Seleccione una opción:",
+                choices=[
+                    {"name": "Volver al menu princial", "value": "volver"},
+                ],
+            ).execute()
+
+            match opcion:
+                case "volver":
+                    break
+                    
+            self.pausa()
+
+
+    def submenu_comunicacion_serie(self):
+        while True:
+            self.limpiar_pantalla()
+            print(f"{term.darkorange2}=============================================================")
+            print(f"{term.white}Submenú comunicacion serie")
+            print(f"{term.darkorange2}============================================================={term.normal}")
+
+            opcion = inquirer.select(
+                message="Seleccione una opción:",
+                choices=[
+                    {"name": "Abrir puerto", "value": "SERIE_ABRIR_PUERTO"},
+                    {"name": "cerrar puerto", "value": "SERIE_CERRAR_PUERTO"},
+                    {"name": "Volver al menu princial", "value": "volver"},
+                ],
+            ).execute()
+
+            match opcion:
+                case "volver":
+                    break
+                case "SERIE_ABRIR_PUERTO":
+                    self.conectar_puerto_serie()
+                case "SERIE_CERRAR_PUERTO":
+                    self.desconectar_puerto_serie()
+                    
+            self.pausa()
+
+
     def submenu_senales_digitales(self):
         
         while True:
@@ -32,7 +80,11 @@ class Menu:
                 message="Seleccione una opción:",
                 choices=[
                     {"name": "Leer entradas y salidas", "value": "leer_entradas_salidas"},
+                    {"name": "Prender LED", "value": "prender_led"},
+                    {"name": "Apagar LED", "value": "apagar_led"},
+
                     {"name": "Volver al menú principal", "value": "volver"},
+
                 ],
             ).execute()
 
@@ -41,6 +93,11 @@ class Menu:
                     break
                 case "leer_entradas_salidas":
                     self.leer_entradas_salidas()
+
+                case "prender_led":
+                    self.prender_led()
+                case "apagar_led":
+                    self.apagar_led()
             self.pausa()
 
     def pausa(self):
@@ -61,11 +118,12 @@ class Menu:
             opcion = inquirer.select(
                 message="Seleccione una opción:",
                 choices=[
-                    {"name": "Conectar puerto serie", "value": "puerto_serie_conectar"},
-                    {"name": "Desconectar puerto serie", "value": "puerto_serie_desconectar"},
+                    # {"name": "Conectar puerto serie", "value": "puerto_serie_conectar"},
+                    # {"name": "Desconectar puerto serie", "value": "puerto_serie_desconectar"},
+                    {"name": "Puerto serie", "value": "SUBMENU_PUERTO_SERIE"},
+
                     {"name": "Obtener versión del programa", "value": "obtener_version"},
-                    {"name": "Prender LED", "value": "prender_led"},
-                    {"name": "Apagar LED", "value": "apagar_led"},
+
 
                     {"name": "señales digitales", "value": "submenu_senales_digitales"},
 
@@ -77,14 +135,13 @@ class Menu:
                 case "salir":
                     print("Saliendo del programa...")
                     break
-                case "puerto_serie_conectar":
-                    self.conectar_puerto_serie()
-                case "puerto_serie_desconectar":
-                    self.desconectar_puerto_serie()
-                case "prender_led":
-                    self.prender_led()
-                case "apagar_led":
-                    self.apagar_led()
+                case "SUBMENU_PUERTO_SERIE":
+                    self.submenu_comunicacion_serie()
+                # case "puerto_serie_conectar":
+                #     self.conectar_puerto_serie()
+                # case "puerto_serie_desconectar":
+                #     self.desconectar_puerto_serie()
+
                 case "submenu_senales_digitales":
                     self.submenu_senales_digitales()
 
