@@ -1,8 +1,16 @@
 /* Definicion de pines */
-int DI_00 = 32;
-int DI_01 = 33;
+// int DI_00 = 32;
+// int DI_01 = 33;
 
-int DO_00 = 23;
+// int DO_00 = 23;
+
+// ESP32 S3 
+int DI_00 = 4;
+int DI_01 = 5;
+
+int DO_00 = 1;
+
+
 
 // Señales virtuales
 // Entradas

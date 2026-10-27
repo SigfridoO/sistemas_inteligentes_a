@@ -22,9 +22,7 @@ class Menu:
 
     def submenu_senales_digitales(self):
         
-
         while True:
-
             self.limpiar_pantalla()
             print(f"{term.darkorange2}=============================================================")
             print(f"{term.white}Submenú señales digitales")
@@ -37,8 +35,6 @@ class Menu:
                     {"name": "Volver al menú principal", "value": "volver"},
                 ],
             ).execute()
-
-            
 
             match opcion:
                 case "volver":
