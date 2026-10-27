@@ -413,6 +413,17 @@ byte obtenerByteDeArregloByte(byte *arreglo){
     punteroByte = (byte *) arreglo;
     return *punteroByte;
 }
+uint16_t obtenerInt16DeArregloByte(byte *arreglo){
+    return (uint16_t) arreglo[0] | (uint16_t) arreglo[1] << 8;
+}
+
+uint32_t obtenerInt32DeArregloByte (byte *arreglo){
+  return (uint32_t) arreglo[0] | 
+         (uint32_t) arreglo[1] << 8 | 
+         (uint32_t) arreglo[2] << 16 | 
+         (uint32_t) arreglo[3] << 24;
+}
+
 
 
 void bufferEscrituraLimpiar(void){

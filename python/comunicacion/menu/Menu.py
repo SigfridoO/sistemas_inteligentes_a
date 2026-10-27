@@ -30,6 +30,7 @@ class Menu:
             opcion = inquirer.select(
                 message="Seleccione una opción:",
                 choices=[
+                    {"name": "Obtener versión del programa", "value": "obtener_version"},
                     {"name": "Volver al menu princial", "value": "volver"},
                 ],
             ).execute()
@@ -37,7 +38,8 @@ class Menu:
             match opcion:
                 case "volver":
                     break
-                    
+                case "obtener_version":
+                    self.obtener_version()
             self.pausa()
 
 
@@ -118,15 +120,9 @@ class Menu:
             opcion = inquirer.select(
                 message="Seleccione una opción:",
                 choices=[
-                    # {"name": "Conectar puerto serie", "value": "puerto_serie_conectar"},
-                    # {"name": "Desconectar puerto serie", "value": "puerto_serie_desconectar"},
                     {"name": "Puerto serie", "value": "SUBMENU_PUERTO_SERIE"},
-
-                    {"name": "Obtener versión del programa", "value": "obtener_version"},
-
-
                     {"name": "señales digitales", "value": "submenu_senales_digitales"},
-
+                    {"name": "Funciones administrativa", "value": "SUBMENU_FUNCIONES_ADMINISTRATIVAS"},
                     {"name": "Salir", "value": "salir"},
                 ],
             ).execute()
@@ -137,16 +133,11 @@ class Menu:
                     break
                 case "SUBMENU_PUERTO_SERIE":
                     self.submenu_comunicacion_serie()
-                # case "puerto_serie_conectar":
-                #     self.conectar_puerto_serie()
-                # case "puerto_serie_desconectar":
-                #     self.desconectar_puerto_serie()
-
                 case "submenu_senales_digitales":
                     self.submenu_senales_digitales()
+                case "SUBMENU_FUNCIONES_ADMINISTRATIVAS":
+                    self.submenu_funciones_administrativas()
 
-                case "obtener_version":
-                    self.obtener_version()
 
     def conectar_puerto_serie(self):
         self.puerto_serie.abrir()
