@@ -334,14 +334,41 @@ void leerInstruccionDeBuffer(byte *ptrBufferLectura, int *ptrBufferIndice,
                 }
                 // Aqui tendremos la instruccion separada
                 // TODO: procesar la instruccion
-                obtenerInstruccion();
-                
+                if (verificarTrama()) {
+                    obtenerInstruccion();
 //                imprimirTrama(ptrBufferInstruccion, 0, *ptrTamanioBufferInstruccion );
-                *ptrBufferIndice = k;
+                    *ptrBufferIndice = k;
+                }
             } // if
          } // if 
       } // for
   } // if 
+}
+
+bool verificarTrama() {
+  int *tamanio = &bufferIndiceInstruccion;
+  byte *cadena = bufferInstruccion;
+
+  if (*tamanio > bufferIndiceMaximo) {
+    return false;
+  }
+
+  if (cadena[0] !=  (byte)caracterDeInicio || cadena[*tamanio - 1]  != (byte) caracterDeFin) {
+    return  false;
+  }
+
+  // calculado
+  escrituraLongitud = *tamanio - 1;
+  escrituraMascara = 0;
+  for (int i = 0; i< *tamanio; i++) {
+    escrituraMascara ^= cadena[i];
+  }
+
+  // lo que viene en la trama
+  uint16_t longitudTrama = obtenerInt16DeArregloByte(cadena + *tamanio - 4);
+  byte  mascaraTrama = obtenerByteDeArregloByte(cadena + *tamanio -2);
+
+  return (escrituraLongitud == longitudTrama && escrituraMascara == mascaraTrama);
 }
 
 void obtenerInstruccion(){

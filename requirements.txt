@@ -39,3 +39,5 @@ jupyter
 
 # Variables de entorno
 python-dotenv
+
+InquirerPy
