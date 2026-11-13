@@ -4,7 +4,7 @@
 const char* ssid = "ardilluda2";
 const char* password = "01971101";
 
-const char* server_ip = "192.168.0.XXX";
+const char* server_ip = "192.168.0.110";
 const uint16_t server_port = 65432;
 
 WiFiClient cliente;
@@ -44,7 +44,50 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // Estado de las conexiones
+  M[0] = WiFi.status() == WL_CONNECTED;
+  M[1] = M[0] && cliente.connected();
+  
+  // Temporizador de envio
+  TON[0].entrada = M[1] && !M[2];
+  actualizarTON(0);
+  M[2] = TON[0].salida;
+  
+  // Temporizador de reconexion
+  TON[1].entrada = !M[1] && !M[3];
+  actualizarTON(1);
+  M[3]= TON[1].salida;
+
+  // Reconectar WiFi
+  if (M[3]) {
+      if (!M[0]) {
+          Serial.println("Reconectando WiFi...");
+          WiFi.reconnect();
+      } else {
+          Serial.printf("Conectando al servidor %d:%d", server_ip, server_port);
+          cliente.stop();
+          if (cliente.connect(server_ip, server_port))         {
+              Serial.printf("Conexion TCP establecida ");
+              Serial.printf("IP_local %d", WiFi.localIP());
+          } else {
+              Serial.println("No se pudo conectar al servidor");
+          }
+      }
+  }
+  // Enviar un byte (en realidad son dos con el salo de linea \n)
+  if(M[2]) {
+      uint8_t dato = contador;
+      if (cliente.write(&dato, 1) == 1) {
+          cliente.write("\n");
+          Serial.printf("Byte enviado: %d\n", dato);
+          contador++;
+      } else {
+        Serial.println("Error al enviar el byte");
+        cliente.stop();
+      }
+  }
+  delay(1);
+  //Serial.printf("\nM[0]: %d, M[1]: %d ", M[0], M[1]);
 
 }
 
